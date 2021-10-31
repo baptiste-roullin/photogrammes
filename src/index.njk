@@ -1,7 +1,7 @@
 ---
 pagination:
   data: images
-  size: 20
+  size: 40
 ---
 
 <!DOCTYPE html>
@@ -9,15 +9,18 @@ pagination:
   <head>
     {%- include "./_templates/head.njk" %}
   </head>
-  <body class="min-h-screen mx-auto text-gray-900 sans container-2xl">
+  <body class="min-h-screen mx-auto overflow-hidden text-gray-900 per sans container-2xl" style="background-color:#0f0424">
     <main
       id="content"
-       class="relative flex-grow block max-w-full transition-all duration-300 ease-out sm:px-per-lg px-per" id="content">
+       class="relative flex-grow block max-w-full transition-all duration-300 ease-out " id="content">
       {{test}}
-      <ul class="flex flex-col gap-4">
+      <ul
+        class="flex flex-col gap-4 sm:px-per-lg px-per"
+        style="scroll-snap-type: y mandatory;height: 94vh;overflow: scroll;
+      ">
         {% for img in pagination.items %}
-          <li>
-            <img lazy src="/assets/images/{{img}}" >
+          <li style="scroll-snap-align: start;">
+            <img class="m-auto" lazy src="/assets/images/{{img}}" >
           </li>
         {% endfor %}
       </ul>
@@ -25,7 +28,6 @@ pagination:
       <div class="flex items-center justify-between px-0 py-3 sm:px-0">
 
         {# PAGINATION PRÉCÉDENT / SUIVAANT #}
-
         <div class="flex justify-between flex-1 ">
           <div>
             {% if pagination.href.previous %}
@@ -33,6 +35,9 @@ pagination:
       Précédent
     </a>
             {% endif %}
+          </div>
+          <div>
+            <p>Journal visuel. Un flux automatique de ce qui passe sur mes écrans.</p>
           </div>
           <div>
             {% if pagination.href.next %}
