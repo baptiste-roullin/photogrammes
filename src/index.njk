@@ -19,7 +19,7 @@ pagination:
         style="scroll-snap-type: y proximity;height: 94vh;overflow-y: scroll;
       ">
         {% for img in pagination.items %}
-          <li style="scroll-snap-align: start;">
+          <li style="scroll-snap-align: start; scroll-margin-block-start: 1rem;">
             <img class="m-auto" lazy src="/assets/images/{{img}}" >
           </li>
         {% endfor %}
