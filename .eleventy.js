@@ -25,6 +25,8 @@ module.exports = function (config) {
 	config.addPassthroughCopy('src/robots.txt')
 	config.setUseGitIgnore(false)
 
+
+
 	return {
 		dir: {
 			input: 'src',

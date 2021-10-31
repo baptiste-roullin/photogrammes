@@ -13,7 +13,7 @@ module.exports = async function () {
 			}
 		})
 
-		return { images: images }
+		return { images: images.reverse() }
 
 	} catch (err) {
 		console.error(err);

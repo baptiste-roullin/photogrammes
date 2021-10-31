@@ -1,3 +1,9 @@
+---
+pagination:
+  data: images
+  size: 20
+---
+
 <!DOCTYPE html>
 <html lang="fr" class="font-sans">
   <head>
@@ -8,14 +14,36 @@
       id="content"
        class="relative flex-grow block max-w-full transition-all duration-300 ease-out sm:px-per-lg px-per" id="content">
       {{test}}
-      <ul class="">
-        {% for img in images %}
-
+      <ul class="flex flex-col gap-4">
+        {% for img in pagination.items %}
           <li>
-            <img lazy src="assets/images/{{img}}" >
+            <img lazy src="/assets/images/{{img}}" >
           </li>
         {% endfor %}
       </ul>
+
+      <div class="flex items-center justify-between px-0 py-3 sm:px-0">
+
+        {# PAGINATION PRÉCÉDENT / SUIVAANT #}
+
+        <div class="flex justify-between flex-1 ">
+          <div>
+            {% if pagination.href.previous %}
+              <a href="{{ pagination.href.previous }}" class="cta-secondary">
+      Précédent
+    </a>
+            {% endif %}
+          </div>
+          <div>
+            {% if pagination.href.next %}
+              <a href="{{ pagination.href.next }}" class="cta-secondary">
+      Suivant
+    </a>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
     </main>
 
   </body>
