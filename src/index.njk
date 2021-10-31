@@ -9,17 +9,15 @@ pagination:
   <head>
     {%- include "./_templates/head.njk" %}
   </head>
-  <body class="min-h-screen mx-auto overflow-hidden text-gray-900 per sans container-2xl" style="background-color:#0f0424">
+  <body class="min-h-screen mx-auto text-gray-900 per sans container-2xl" style="background-color:#0f0424">
     <main
       id="content"
        class="relative flex-grow block max-w-full transition-all duration-300 ease-out " id="content">
       {{test}}
       <ul
-        class="flex flex-col gap-4 sm:px-per-lg px-per"
-        style="scroll-snap-type: y mandatory;height: 94vh;overflow-y: scroll;
-      ">
+        class="flex flex-col gap-4 sm:px-per-lg px-per">
         {% for img in pagination.items %}
-          <li style="scroll-snap-align: start; max-height:94vh;">
+          <li style="">
             <img class="m-auto" lazy src="/assets/images/{{img}}" >
           </li>
         {% endfor %}
