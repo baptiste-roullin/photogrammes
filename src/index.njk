@@ -13,9 +13,8 @@ pagination:
     <main
       id="content"
        class="relative flex-grow block max-w-full transition-all duration-300 ease-out " id="content">
-      {{test}}
-      <div class="flex items-center justify-between px-0 py-3 sm:px-0">
 
+      <div class="flex items-center justify-between px-0 py-3 sm:px-0">
         {# PAGINATION PRÉCÉDENT / SUIVAANT #}
         <div class="flex justify-between flex-1 my-8 lg:my-16 sm:px-per-lg ">
           <div>
@@ -36,6 +35,7 @@ pagination:
         </div>
 
       </div>
+
       <ul
         class="flex flex-col gap-4 lg:gap-8 sm:px-per-lg px-per">
         {% for img in pagination.items %}
@@ -44,6 +44,27 @@ pagination:
           </li>
         {% endfor %}
       </ul>
+
+      <div class="flex items-center justify-between px-0 py-3 sm:px-0">
+        {# PAGINATION PRÉCÉDENT / SUIVAANT #}
+        <div class="flex justify-between flex-1 my-8 lg:my-16 sm:px-per-lg ">
+          <div>
+            {% if pagination.href.previous %}
+              <a href="{{ pagination.href.previous }}" class="cta-secondary">
+          Précédent
+              </a>
+            {% endif %}
+          </div>
+          <div>
+            {% if pagination.href.next %}
+              <a href="{{ pagination.href.next }}" class="cta-secondary">
+            Suivant
+          </a>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
 
     </main>
 
