@@ -14,30 +14,31 @@ pagination:
       id="content"
        class="relative flex-grow block max-w-full transition-all duration-300 ease-out " id="content">
 
-      <div class="flex items-center justify-between px-0 py-3 sm:px-0">
-        {# PAGINATION PRÉCÉDENT / SUIVAANT #}
-        <div class="flex justify-between flex-1 my-8 lg:my-16 sm:px-per-lg ">
-          <div>
-            {% if pagination.href.previous %}
-              <a href="{{ pagination.href.previous }}" class="cta-secondary">
+      <header class="flex flex-wrap justify-between p-4 my-8 md:flex-nowrap lg:my-16 sm:p-6 md:px-per-lg ">
+        <div class="order-2 md:order-1">
+          {% if pagination.href.previous %}
+            <a href="{{ pagination.href.previous }}" class="justify-center w-24 cta-secondary">
           Précédent
               </a>
-            {% endif %}
-          </div>
-          <h1 class="font-normal text-white">Journal visuel. Un flux automatique de ce qui passe sur mes écrans.</h1>
-          <div>
-            {% if pagination.href.next %}
-              <a href="{{ pagination.href.next }}" class="cta-secondary">
-            Suivant
-          </a>
-            {% endif %}
-          </div>
+          {% endif %}
         </div>
 
-      </div>
+        <h1 style=" flex-basis:100%;"
+          class="flex justify-center order-3 mt-8 text-2xl font-normal text-center text-white sm:-text-3xl md-leading-8 md:mt-0 md:order-2 lg:text-4xl">
+            Journal visuel. Un flux semi-auto de ce qui passe sur mes écrans.
+            </h1>
+
+        <div class="order-2 md:order-3 ">
+          {% if pagination.href.next %}
+            <a href="{{ pagination.href.next }}" class="justify-center w-24 cta-secondary">
+            Suivant
+          </a>
+          {% endif %}
+        </div>
+      </header>
 
       <ul
-        class="flex flex-col gap-4 lg:gap-8 sm:px-per-lg px-per">
+        class="flex flex-col gap-4 px-0 sm-gap6 lg:gap-8 sm:px-per-lg ">
         {% for img in pagination.items %}
           <li style="">
             <img class="m-auto" lazy src="/assets/images/{{img}}" >
@@ -50,14 +51,14 @@ pagination:
         <div class="flex justify-between flex-1 my-8 lg:my-16 sm:px-per-lg ">
           <div>
             {% if pagination.href.previous %}
-              <a href="{{ pagination.href.previous }}" class="cta-secondary">
+              <a href="{{ pagination.href.previous }}" class="justify-center w-24 cta-secondary">
           Précédent
               </a>
             {% endif %}
           </div>
           <div>
             {% if pagination.href.next %}
-              <a href="{{ pagination.href.next }}" class="cta-secondary">
+              <a href="{{ pagination.href.next }}" class="justify-center w-24 cta-secondary">
             Suivant
           </a>
             {% endif %}
