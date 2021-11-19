@@ -41,7 +41,9 @@ pagination:
         class="flex flex-col gap-4 px-0 sm-gap6 lg:gap-8 sm:px-per-lg ">
         {% for img in pagination.items %}
           <li style="">
-            <a href="#{{loop.index}}"><img class="m-auto" lazy src="/assets/images/{{img}}" ></a>
+            <a href="#{{loop.index}}">
+              <img class="m-auto" id="{{loop.index}}" lazy src="/assets/images/{{img}}" >
+            </a>
           </li>
         {% endfor %}
       </ul>
