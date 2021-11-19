@@ -1,6 +1,6 @@
 ---
 pagination:
-  data: images
+  data: collections.sortedSnaps
   size: 40
 ---
 
@@ -41,7 +41,7 @@ pagination:
         class="flex flex-col gap-4 px-0 sm-gap6 lg:gap-8 sm:px-per-lg ">
         {% for img in pagination.items %}
           <li style="">
-            <img class="m-auto" lazy src="/assets/images/{{img}}" >
+            <a href="#{{loop.index}}"><img class="m-auto" lazy src="/assets/images/{{img}}" ></a>
           </li>
         {% endfor %}
       </ul>

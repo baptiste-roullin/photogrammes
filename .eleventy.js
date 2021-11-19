@@ -13,17 +13,44 @@ module.exports = function (config) {
 	* by default not watched by 11ty
 	* @link https://www.11ty.dev/docs/config/#add-your-own-watch-targets
 	*/
+
+	const { readdir, stat } = require('fs/promises');
+
+
 	config.addWatchTarget('./src/assets/css/')
 	config.addWatchTarget('./src/assets/scripts/')
 	config.addWatchTarget('./src/*.js')
-	config.addWatchTarget('./tailwind.config.js')
 	config.setWatchThrottleWaitTime(200);
 
 	config.setWatchJavaScriptDependencies(true);
 
 	config.addPassthroughCopy('src/assets/')
-	config.addPassthroughCopy('src/robots.txt')
 	config.setUseGitIgnore(false)
+
+	config.addCollection("sortedSnaps", async function () {
+
+		try {
+			const basePath = 'src/assets/images/'
+			const dir = await readdir(basePath, { withFileTypes: true });
+
+			let files = dir.map(file => file.name
+			).filter((fileName) => {
+				const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp)$/g)
+				if (isImage.test(fileName)) {
+					return true
+				}
+			}).sort(async (a, b) => {
+				let aStat = await stat(`${basePath}/${a}`),
+					bStat = await stat(`${basePath}/${b}`);
+				return new Date(aStat.mtime).getTime() - new Date(bStat.mtime).getTime();
+			});
+			return files.reverse()
+
+		} catch (err) {
+			console.error(err);
+		}
+
+	});
 
 
 
