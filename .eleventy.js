@@ -62,7 +62,7 @@ module.exports = function (config) {
 			data: '_data',
 		},
 		passthroughFileCopy: true,
-		templateFormats: ['html', 'njk', 'md'],
+		templateFormats: ['njk'],
 		htmlTemplateEngine: 'njk',
 		markdownTemplateEngine: 'njk',
 	}
