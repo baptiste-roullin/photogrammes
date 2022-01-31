@@ -31,20 +31,25 @@ module.exports = function (config) {
 
 		try {
 			const basePath = 'src/assets/images/'
-			const dir = await readdir(basePath, { withFileTypes: true });
+			const dir = await Promise.all(await readdir(basePath, { withFileTypes: true }))
 
-			let files = dir.map(file => file.name
-			).filter((fileName) => {
+			return (await Promise.all(dir.map(async (fileName) => {
+				const { name } = fileName
+				const metadata = await stat(`${basePath}/${name}`);
+
+				return {
+					name,
+					time: metadata.mtime.getTime()
+				}
+			}
+			))).filter((file) => {
+
 				const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp)$/g)
-				if (isImage.test(fileName)) {
+				if (isImage.test(file.name)) {
 					return true
 				}
-			}).sort(async (a, b) => {
-				let aStat = await stat(`${basePath}/${a}`),
-					bStat = await stat(`${basePath}/${b}`);
-				return new Date(aStat.mtime).getTime() - new Date(bStat.mtime).getTime();
-			});
-			return files.reverse()
+			}).sort((a, b) => a.time - b.time).map(file => file.name).reverse()
+
 
 		} catch (err) {
 			console.error(err);
