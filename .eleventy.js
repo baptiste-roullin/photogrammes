@@ -66,9 +66,8 @@ module.exports = function (config) {
 			const dir = await readdir(basePath, { withFileTypes: true })
 			return (
 				await Promise.all(dir
-					.map(gettingCommitedDate)
-				))
-				.filter(onlyImages)
+					.map(fileName => gettingCommitedDate(basePath, fileName))
+				)).filter(onlyImages)
 				.sort((a, b) => a.time - b.time)
 				//returning only the name
 				.map(file => file.name)
