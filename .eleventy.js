@@ -31,36 +31,44 @@ module.exports = function (config) {
 	config.setUseGitIgnore(false)
 
 	config.addCollection("sortedSnaps", async function () {
-
 		try {
 			const basePath = 'src/assets/images/'
-			const dir = await Promise.all(await readdir(basePath, { withFileTypes: true }))
-
+			const dir = await readdir(basePath, { withFileTypes: true })
 			return (await Promise.all(dir.map(async (fileName) => {
 				const { name } = fileName
-				const metadata = await stat(`${basePath}/${name}`)
-
-				return {
-					name,
-					time: metadata.mtime.getTime()
+				const command = `git log -1 --pretty=\"format:%ct\" \"${basePath}\/${name}\"`
+				try {
+					const { stdout } = await exec(command)
+					return {
+						name,
+						time: Number(stdout)
+					}
+				} catch (e) {
+					if (e instanceof Error) {
+						console.log(new Error(`Failed executing ${command} with ${e.message}`))
+					}
+					const metadata = await stat(`${basePath}/${name}`)
+					return {
+						name,
+						time: metadata.mtime.getTime()
+					}
 				}
-			}
-			))).filter((file) => {
+			})))
+				.filter((file) => {
 
-				const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp)$/g)
-				if (isImage.test(file.name)) {
-					return true
-				}
-			}).sort((a, b) => a.time - b.time).map(file => file.name).reverse()
-
-
+					const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp)$/g)
+					if (isImage.test(file.name)) {
+						return true
+					}
+				})
+				.sort((a, b) => a.time - b.time)
+				.map(file => { console.log(file); return file.name })
+				.reverse()
 		} catch (err) {
 			console.error(err)
 		}
 
 	})
-
-
 
 	return {
 		dir: {
