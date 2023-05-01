@@ -13,7 +13,6 @@ pagination:
     <main
       id="content"
        class="relative flex-grow block max-w-full transition-all duration-300 ease-out " id="content">
-
       <header class="flex flex-wrap justify-between p-4 my-8 md:flex-nowrap lg:my-16 sm:p-6 md:px-per-lg ">
         <div class="order-2 md:order-1">
           {% if pagination.href.previous %}
@@ -22,12 +21,10 @@ pagination:
               </a>
           {% endif %}
         </div>
-
         <h1 style=" flex-basis:100%;"
           class="flex justify-center order-3 mt-8 text-2xl font-normal text-center text-white sm:-text-3xl md-leading-8 md:mt-0 md:order-2 lg:text-4xl">
             Journal visuel. Un flux semi-auto de ce qui passe sur mes écrans.
             </h1>
-
         <div class="order-2 md:order-3 ">
           {% if pagination.href.next %}
             <a href="{{ pagination.href.next }}" class="justify-center w-24 cta-secondary">
@@ -36,7 +33,6 @@ pagination:
           {% endif %}
         </div>
       </header>
-
       <ul
         class="flex flex-col gap-4 px-0 sm-gap6 lg:gap-8 sm:px-per-lg ">
         {% for img in pagination.items %}
@@ -66,10 +62,7 @@ pagination:
             {% endif %}
           </div>
         </div>
-
       </div>
-
     </main>
-
   </body>
 </html>
