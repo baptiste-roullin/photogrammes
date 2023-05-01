@@ -1,6 +1,9 @@
 {
   "name": "tout-ce-qui-bouge",
   "version": "0.2.0",
+  "engines": {
+    "node": "20.0.0"
+  },
   "scripts": {
     "dev:eleventy": "eleventy --incremental --serve",
     "debug:eleventy": "DEBUG=* eleventy",
@@ -11,12 +14,12 @@
     "build": "run-s  build:* --print-label"
   },
   "devDependencies": {
-    "@11ty/eleventy": "v2.0.0-canary.30",
+    "@11ty/eleventy": "v2.0.1",
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",
     "cssnano": "^5.0.8",
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.0.3",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.2.15",
     "postcss-cli": "^8.2.2",
@@ -24,12 +27,11 @@
     "postcss-import": "^14.0.1",
     "postcss-loader": "^5.2.0",
     "postcss-nested": "^5.0.3",
-    "rimraf": "^3.0.2",
-    "tailwindcss": "^2.2.7"
+    "tailwindcss": "^3.3.2"
   },
   "dependencies": {
-    "alpinejs": "^3.4.2",
-    "photoswipe": "github:dimsemenov/photoswipe#v5-beta"
+    "alpinejs": "^3.12.0",
+    "photoswipe": "*"
   },
   "_moduleAliases": {
     "@src": "./src",

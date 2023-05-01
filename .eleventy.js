@@ -1,3 +1,6 @@
+const util = require('node:util')
+const exec = util.promisify(require('node:child_process').exec)
+
 module.exports = function (config) {
 	/**
 	 * Opts in to a full deep merge when combining the Data Cascade.
@@ -14,15 +17,15 @@ module.exports = function (config) {
 	* @link https://www.11ty.dev/docs/config/#add-your-own-watch-targets
 	*/
 
-	const { readdir, stat } = require('fs/promises');
+	const { readdir, stat } = require('fs/promises')
 
 
 	config.addWatchTarget('./src/assets/css/')
 	config.addWatchTarget('./src/assets/scripts/')
 	config.addWatchTarget('./src/*.js')
-	config.setWatchThrottleWaitTime(200);
+	config.setWatchThrottleWaitTime(200)
 
-	config.setWatchJavaScriptDependencies(true);
+	config.setWatchJavaScriptDependencies(true)
 
 	config.addPassthroughCopy('src/assets/')
 	config.setUseGitIgnore(false)
@@ -35,7 +38,7 @@ module.exports = function (config) {
 
 			return (await Promise.all(dir.map(async (fileName) => {
 				const { name } = fileName
-				const metadata = await stat(`${basePath}/${name}`);
+				const metadata = await stat(`${basePath}/${name}`)
 
 				return {
 					name,
@@ -52,10 +55,10 @@ module.exports = function (config) {
 
 
 		} catch (err) {
-			console.error(err);
+			console.error(err)
 		}
 
-	});
+	})
 
 
 
