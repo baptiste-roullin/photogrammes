@@ -31,39 +31,49 @@ module.exports = function (config) {
 	config.setUseGitIgnore(false)
 
 	config.addCollection("sortedSnaps", async function () {
+
+		async function gettingCommitedDate(basePath, fileName) {
+			const { name } = fileName
+			const command = `git log -1 --pretty=\"format:%ct\" \"${basePath}\/${name}\"`
+			try {
+				const { stdout } = await exec(command)
+				return {
+					name,
+					time: Number(stdout)
+				}
+			} catch (e) {
+				if (e instanceof Error) {
+					console.log(new Error(`Failed executing ${command} with ${e.message}`))
+				}
+				const metadata = await stat(`${basePath}/${name}`)
+				return {
+					name,
+					time: metadata.mtime.getTime()
+				}
+			}
+		}
+
+		function onlyImages(file) {
+
+			const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp)$/g)
+			if (isImage.test(file.name)) {
+				return true
+			}
+		}
+
 		try {
 			const basePath = 'src/assets/images/'
 			const dir = await readdir(basePath, { withFileTypes: true })
-			return (await Promise.all(dir.map(async (fileName) => {
-				const { name } = fileName
-				const command = `git log -1 --pretty=\"format:%ct\" \"${basePath}\/${name}\"`
-				try {
-					const { stdout } = await exec(command)
-					return {
-						name,
-						time: Number(stdout)
-					}
-				} catch (e) {
-					if (e instanceof Error) {
-						console.log(new Error(`Failed executing ${command} with ${e.message}`))
-					}
-					const metadata = await stat(`${basePath}/${name}`)
-					return {
-						name,
-						time: metadata.mtime.getTime()
-					}
-				}
-			})))
-				.filter((file) => {
-
-					const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp)$/g)
-					if (isImage.test(file.name)) {
-						return true
-					}
-				})
+			return (
+				await Promise.all(dir
+					.map(gettingCommitedDate)
+				))
+				.filter(onlyImages)
 				.sort((a, b) => a.time - b.time)
-				.map(file => { console.log(file); return file.name })
+				//returning only the name
+				.map(file => file.name)
 				.reverse()
+
 		} catch (err) {
 			console.error(err)
 		}
