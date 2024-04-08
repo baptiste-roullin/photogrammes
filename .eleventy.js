@@ -89,8 +89,8 @@ module.exports = function (config) {
 		urlPath: "assets/images",
 		filenameFormat: function (id, src, width, format, options) {
 			const extension = path.extname(src)
-			const name = path.basename(src)
-			return name
+			const name = path.basename(src, extension)
+			return name + '.webp'
 		},
 		formats: ["webp"],
 		sharpWebpOptions: {
