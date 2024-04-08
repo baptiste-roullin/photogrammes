@@ -1,5 +1,6 @@
 const util = require('node:util')
 const exec = util.promisify(require('node:child_process').exec)
+const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img")
 
 module.exports = function (config) {
 	/**
@@ -78,6 +79,36 @@ module.exports = function (config) {
 		}
 
 	})
+
+
+
+	config.addPlugin(eleventyImageTransformPlugin, {
+		// which file extensions to process
+		extensions: "html",
+		urlPath: "assets/images",
+
+		// Add any other Image utility options here:
+
+		// optional, output image formats
+		formats: ["webp"],
+		sharpWebpOptions: {
+			quality: 90
+		},
+		// formats: ["auto"],
+
+		// optional, output image widths
+		widths: ["auto"],
+
+		// optional, attributes assigned on <img> override these values.
+		defaultAttributes: {
+			alt: "",
+			loading: "lazy",
+			decoding: "async",
+		},
+	})
+
+
+
 
 	return {
 		dir: {

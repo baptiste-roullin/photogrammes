@@ -2,7 +2,7 @@
   "name": "tout-ce-qui-bouge",
   "version": "0.2.0",
   "engines": {
-    "node": "20.0.0"
+    "node": "^20.11.1"
   },
   "scripts": {
     "dev:eleventy": "eleventy --incremental --serve",
@@ -14,7 +14,8 @@
     "build": "run-s  build:* --print-label"
   },
   "devDependencies": {
-    "@11ty/eleventy": "v2.0.1",
+    "@11ty/eleventy": "^3.0.0-alpha.5",
+    "@11ty/eleventy-img": "^4.0.2",
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",
