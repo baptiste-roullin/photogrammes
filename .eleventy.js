@@ -2,6 +2,8 @@ const path = require("path")
 const util = require('node:util')
 const exec = util.promisify(require('node:child_process').exec)
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img")
+const slugify = require('@sindresorhus/slugify')
+
 
 module.exports = function (config) {
 	/**
@@ -24,12 +26,14 @@ module.exports = function (config) {
 
 	config.addWatchTarget('./src/assets/css/')
 	config.addWatchTarget('./src/assets/scripts/')
+	config.addWatchTarget('./src/assets/UI/')
+
 	config.addWatchTarget('./src/*.js')
 	config.setWatchThrottleWaitTime(200)
 
 	config.setWatchJavaScriptDependencies(true)
 
-	config.addPassthroughCopy('src/assets/')
+	/*config.addPassthroughCopy('src/assets/')*/
 	config.setUseGitIgnore(false)
 
 	config.addCollection("sortedSnaps", async function () {
@@ -48,8 +52,9 @@ module.exports = function (config) {
 					console.log(new Error(`Failed executing ${command} with ${e.message}`))
 				}
 				const metadata = await stat(`${basePath}/${name}`)
+				const slug = slugify(name)
 				return {
-					name,
+					name: slug,
 					time: metadata.mtime.getTime()
 				}
 			}
@@ -86,7 +91,7 @@ module.exports = function (config) {
 	config.addPlugin(eleventyImageTransformPlugin, {
 		// which file extensions to process
 		extensions: "html",
-		urlPath: "assets/images",
+		urlPath: "/assets/images",
 		filenameFormat: function (id, src, width, format, options) {
 			const extension = path.extname(src)
 			const name = path.basename(src, extension)
