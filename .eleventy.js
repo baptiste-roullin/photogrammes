@@ -2,7 +2,6 @@ const path = require("path")
 const util = require('node:util')
 const exec = util.promisify(require('node:child_process').exec)
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img")
-const slugify = require('@sindresorhus/slugify')
 
 
 module.exports = function (config) {
