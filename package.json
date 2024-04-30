@@ -2,19 +2,20 @@
   "name": "tout-ce-qui-bouge",
   "version": "0.2.0",
   "engines": {
-    "node": "20.0.0"
+    "node": "^20.11.1"
   },
   "scripts": {
-    "dev:eleventy": "eleventy --incremental --serve",
-    "debug:eleventy": "DEBUG=* eleventy",
+    "dev:eleventy": "npx @11ty/eleventy --incremental --serve",
+    "debug:eleventy": "DEBUG=* npx @11ty/eleventy",
     "dev:postcss": "postcss src/assets/css/main.css -o dist/assets/css/main.css --watch",
     "dev": "npm-run-all  --parallel dev:* --print-label",
     "build:postcss": "cross-env NODE_ENV=production postcss --verbose src/assets/css/main.css -o dist/assets/css/main.css",
-    "build:eleventy": "cross-env NODE_ENV=production eleventy  --incremental --quiet",
+    "build:eleventy": "cross-env NODE_ENV=production npx @11ty/eleventy  --incremental --quiet",
     "build": "run-s  build:* --print-label"
   },
   "devDependencies": {
-    "@11ty/eleventy": "v2.0.1",
+    "@11ty/eleventy": "^3.0.0-alpha.5",
+    "@11ty/eleventy-img": "^4.0.2",
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",

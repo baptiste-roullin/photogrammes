@@ -1,5 +1,7 @@
+const path = require("path")
 const util = require('node:util')
 const exec = util.promisify(require('node:child_process').exec)
+const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img")
 
 module.exports = function (config) {
 	/**
@@ -78,6 +80,32 @@ module.exports = function (config) {
 		}
 
 	})
+
+
+
+	config.addPlugin(eleventyImageTransformPlugin, {
+		// which file extensions to process
+		extensions: "html",
+		urlPath: "assets/images",
+		filenameFormat: function (id, src, width, format, options) {
+			const extension = path.extname(src)
+			const name = path.basename(src, extension)
+			return name + '.webp'
+		},
+		formats: ["webp"],
+		sharpWebpOptions: {
+			quality: 90
+		},
+		widths: ["auto"],
+		defaultAttributes: {
+			alt: "",
+			loading: "lazy",
+			decoding: "async",
+		},
+	})
+
+
+
 
 	return {
 		dir: {

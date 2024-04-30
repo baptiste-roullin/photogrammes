@@ -38,7 +38,7 @@ pagination:
         {% for img in pagination.items %}
           <li style="">
             <a href="#{{loop.index}}">
-              <img class="w-full h-auto m-auto max-w-11xl" id="{{loop.index}}" lazy src="/assets/images/{{img}}" >
+              <img class="w-full h-auto m-auto max-w-11xl" id="{{loop.index}}" alt="" src="/assets/images/{{img}}" >
             </a>
           </li>
         {% endfor %}
