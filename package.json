@@ -13,6 +13,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0-alpha.5",
     "@11ty/eleventy-img": "^4.0.2",
+    "@sindresorhus/slugify": "^1.1.0",
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",
@@ -25,12 +26,7 @@
     "postcss-import": "^14.0.1",
     "postcss-loader": "^5.2.0",
     "postcss-nested": "^5.0.3",
-    "tailwindcss": "^2.2.7",
-    "@sindresorhus/slugify": "^1.1.0"
-  },
-  "dependencies": {
-    "alpinejs": "^3.12.0",
-    "photoswipe": "*"
+    "tailwindcss": "^2.2.7"
   },
   "_moduleAliases": {
     "@src": "./src",
@@ -48,5 +44,8 @@
         "targets": "> 0.25%, not dead"
       }
     ]
-  ]
+  ],
+  "dependencies": {
+    "murmurhash": "^2.0.1"
+  }
 }

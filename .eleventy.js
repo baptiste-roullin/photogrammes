@@ -2,7 +2,7 @@ const path = require("path")
 const util = require('node:util')
 const exec = util.promisify(require('node:child_process').exec)
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img")
-
+const murmurhash = require('murmurhash')
 
 module.exports = function (config) {
 	/**
@@ -82,6 +82,13 @@ module.exports = function (config) {
 		} catch (err) {
 			console.error(err)
 		}
+
+	})
+
+	config.addFilter("hashFromName", async function (str) {
+		const te = new TextEncoder()
+		const strArrayed = te.encode(str.normalize('NFKC'))
+		return murmurhash.v3(strArrayed)
 
 	})
 

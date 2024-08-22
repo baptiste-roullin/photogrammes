@@ -12,7 +12,7 @@ pagination:
   <body class="min-h-screen mx-auto text-gray-900 per sans container-2xl" style="background-color:#0f0424">
     <main
       id="content"
-       class="relative flex-grow block max-w-full transition-all duration-300 ease-out " id="content">
+       class="relative flex-grow block max-w-full transition-all duration-300 ease-out ">
       <header class="flex flex-wrap justify-between p-4 my-8 md:flex-nowrap lg:my-16 sm:p-6 md:px-per-lg ">
         <div class="order-2 md:order-1">
           {% if pagination.href.previous %}
@@ -37,8 +37,8 @@ pagination:
         class="flex flex-col gap-4 px-0 sm-gap6 lg:gap-8 sm:px-per-lg ">
         {% for img in pagination.items %}
           <li style="">
-            <a href="#{{loop.index}}">
-              <img class="w-full h-auto m-auto max-w-11xl" id="{{loop.index}}" alt="" src="/assets/images/{{img}}" >
+            <a href="#{{img | hashFromName}}">
+              <img class="w-full h-auto m-auto max-w-11xl" id="{{img | hashFromName}}" alt="" src="/assets/images/{{img}}" >
             </a>
           </li>
         {% endfor %}
