@@ -35,7 +35,6 @@ export default async function (config) {
 
 			try {
 				const { stdout } = await pExec(command)
-				console.log(stdout)
 				return {
 					name,
 					time: Number(stdout)
@@ -62,7 +61,7 @@ export default async function (config) {
 		}
 
 		try {
-			const basePath = 'src/img/'
+			const basePath = 'src/assets/images/'
 			const dir = await readdir(basePath, { withFileTypes: true })
 			return (
 				await Promise.all(dir
@@ -96,6 +95,7 @@ export default async function (config) {
 			const name = path.basename(src, extension)
 			return name + '.webp'
 		},
+		output: "assets/images/",
 		formats: ["webp"],
 		widths: ["auto"],
 		defaultAttributes: {
