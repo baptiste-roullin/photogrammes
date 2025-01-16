@@ -1,8 +1,6 @@
-require('dotenv').config()
 
 
-module.exports = {
-	env: process.env.NODE_ENV || 'development ',
+export const meta = {
 	siteURL: 'https://toutcequibouge.net/',
 	siteName: "Photogrammes",
 	siteDescription: 'Veille et réflexion sur la technologie, ses usages et mésusages.',
