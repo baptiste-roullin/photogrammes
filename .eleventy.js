@@ -96,8 +96,12 @@ export default async function (config) {
 			return name + '.webp'
 		},
 		output: "assets/images/",
-		formats: ["webp"],
+		formats: ["avif"],
 		widths: ["auto"],
+		sharpWebpOptions: {
+			quality: 95,
+			effort: 6
+		},
 		defaultAttributes: {
 			alt: "",
 			loading: "lazy",

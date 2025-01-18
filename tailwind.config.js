@@ -9,8 +9,6 @@ module.exports = {
 		content: [
 			'./src/**/*.html',
 			'./src/**/*.njk',
-			'./src/**/*.md',
-			'./src/_data/structure.js',
 		]
 	},
 	theme: {
