@@ -18,7 +18,6 @@ export default async function (config) {
 	config.addWatchTarget('./src/assets/css/')
 	config.addWatchTarget('./src/assets/scripts/')
 	config.addWatchTarget('./src/assets/UI/')
-
 	config.addWatchTarget('./src/*.js')
 	config.setWatchThrottleWaitTime(200)
 
@@ -85,22 +84,21 @@ export default async function (config) {
 
 	})
 
-
-
 	config.addPlugin(eleventyImageTransformPlugin, {
 		// which file extensions to process
 		extensions: "html",
 		filenameFormat: function (id, src, width, format, options) {
 			const extension = path.extname(src)
 			const name = path.basename(src, extension)
-			return name + '.webp'
+			return `${name}.${format}`
+
 		},
 		output: "assets/images/",
-		formats: ["avif"],
+		formats: ["avif", "jpeg"],
 		widths: ["auto"],
 		sharpWebpOptions: {
-			quality: 95,
-			effort: 6
+			quality: 90,
+			effort: 5
 		},
 		defaultAttributes: {
 			alt: "",
