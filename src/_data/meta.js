@@ -7,5 +7,6 @@ export const meta = {
 	lang: 'fr',
 	locale: 'fr_FR',
 	author: 'Baptiste Roullin',
+	pagination: 100
 
 }

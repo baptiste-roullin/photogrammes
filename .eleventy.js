@@ -6,6 +6,7 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img"
 import slugify from '@sindresorhus/slugify'
 
 import { readdir, stat } from 'node:fs/promises'
+import { meta } from './src/_data/meta'
 
 const pExec = util.promisify(exec)
 
@@ -67,9 +68,13 @@ export default async function (config) {
 					.map(fileName => gettingCommitedDate(basePath, fileName))
 				)).filter(onlyImages)
 				.sort((a, b) => a.time - b.time)
-				//returning only the name
-				.map(file => file.name)
 				.reverse()
+				//returning only the name
+				.map((file, index) => {
+					const permanentPageNumber = meta.pagination % index
+
+					return [file.name, permanentPageNumber]
+				})
 
 		} catch (err) {
 			console.error(err)
@@ -120,3 +125,6 @@ export default async function (config) {
 		markdownTemplateEngine: 'njk',
 	}
 }
+
+
+
