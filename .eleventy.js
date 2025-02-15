@@ -1,12 +1,13 @@
 import path from "path"
 import util from 'node:util'
 import { exec } from 'node:child_process'
+
+import { readdir, stat } from 'node:fs/promises'
 import murmurhash from 'murmurhash'
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img"
 import slugify from '@sindresorhus/slugify'
 
-import { readdir, stat } from 'node:fs/promises'
-import { meta } from './src/_data/meta'
+import { meta } from './src/_data/meta.js'
 
 const pExec = util.promisify(exec)
 
