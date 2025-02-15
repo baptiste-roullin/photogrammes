@@ -70,12 +70,6 @@ export default async function (config) {
 				)).filter(onlyImages)
 				.sort((a, b) => a.time - b.time)
 				.reverse()
-				//returning only the name
-				.map((file, index) => {
-					const permanentPageNumber = meta.pagination % index
-
-					return [file.name, permanentPageNumber]
-				})
 
 		} catch (err) {
 			console.error(err)
