@@ -69,8 +69,9 @@ export default async function (config) {
 					.map(fileName => gettingCommitedDate(basePath, fileName))
 				)).filter(onlyImages)
 				.sort((a, b) => a.time - b.time)
+				//returning only the name
+				.map(file => file.name)
 				.reverse()
-
 		} catch (err) {
 			console.error(err)
 		}
