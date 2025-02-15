@@ -4,11 +4,11 @@
   "type": "module",
   "scripts": {
     "dev:eleventy": "npx @11ty/eleventy --incremental --serve",
-    "debug:eleventy": "DEBUG=* npx @11ty/eleventy",
+    "debug:eleventy": "DEBUG=* npx @11ty/eleventy --serve",
     "dev:postcss": "postcss src/assets/css/main.css -o dist/assets/css/main.css --watch",
     "dev": "npm-run-all  --parallel dev:* --print-label",
     "build:postcss": " postcss --verbose src/assets/css/main.css -o dist/assets/css/main.css",
-    "build:eleventy": " npx @11ty/eleventy  --incremental --quiet",
+    "build:eleventy": " npx @11ty/eleventy --quiet",
     "build": "run-s  build:* --print-label"
   },
   "devDependencies": {

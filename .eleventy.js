@@ -64,7 +64,8 @@ export default async function (config) {
 		try {
 			const basePath = 'src/assets/images/'
 			const dir = await readdir(basePath, { withFileTypes: true })
-			return (
+
+			const coll = (
 				await Promise.all(dir
 					.map(fileName => gettingCommitedDate(basePath, fileName))
 				)).filter(onlyImages)
@@ -72,6 +73,7 @@ export default async function (config) {
 				//returning only the name
 				.map(file => file.name)
 				.reverse()
+			return coll
 		} catch (err) {
 			console.error(err)
 		}
