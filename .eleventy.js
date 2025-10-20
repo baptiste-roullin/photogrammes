@@ -114,7 +114,7 @@ export default async function (config) {
 	return {
 		dir: {
 			input: 'src',
-			output: 'dist',
+			output: 'www',
 			includes: '_templates',
 		},
 		passthroughFileCopy: true,
